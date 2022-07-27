@@ -28,11 +28,12 @@ export default class UserRepo {
   }
 
   //function update user info
-  public static async updateInfo(user: User): Promise<any> {
-    return await UserModel.updateOne(
-      { _id: user._id },
-      { $set: { ...user } }
-    ).lean();
+  public static async updateUser(id: Types.ObjectId, user: any): Promise<any> {
+    return await UserModel.findByIdAndUpdate(id, user).lean();
+  }
+
+  public static async deleteUser(id: Types.ObjectId): Promise<any> {
+    return await UserModel.findByIdAndDelete(id).lean();
   }
 
   //function find all users
